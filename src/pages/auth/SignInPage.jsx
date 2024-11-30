@@ -1,8 +1,14 @@
 import AuthForm from "./AuthForm";
 import FormContainer from "./FormContainer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import * as userService from "services/users";
+import { useState } from 'react';
+
 
 const SignInPage = () => {
+
+  const location = useLocation();
+  const [ error, setError] = useState("");
   return (
     <>
       <div className="flex">
@@ -15,6 +21,12 @@ const SignInPage = () => {
 
         <div className="bg-emerald-50 flex flex-col justify-center items-center h-screen flex-1">
           <FormContainer>
+          <div className="text-rose-400 font-lato">{error}</div>
+          {
+            location.state?.accountCreated && <div className="mt-2 bg-emerald-300 p-4 rounded-lg text-green-600">
+              Account created successfully. Please sign in.
+            </div>
+          }
             <AuthForm
               fields={[
                 {
@@ -27,6 +39,21 @@ const SignInPage = () => {
                 },
               ]}
               signInButton="Sign in"
+              onSubmit={ async (values) => {
+                const response = await userService.userSession({
+                  username: values.username,
+                  password: values.password,
+                })
+                const data = await response.json();
+                if(response.status === 201) {
+                  console.log(data)
+                  console.log('user has signed in!')
+                  setError("")
+                } else {
+                  setError(data.error);
+                }
+    
+              }}
             />
             <Link to="/" className="text-emerald-500 font-lato underline">
               create an account

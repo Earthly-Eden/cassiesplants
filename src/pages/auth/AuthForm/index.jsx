@@ -15,7 +15,6 @@ const AuthForm = (props) => {
 
   //this will long our user's current input in each of the
   //signInPage component and signUpPagae component
-  console.log(values);
 
   return (
     <div className="">

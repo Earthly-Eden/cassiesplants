@@ -1,11 +1,12 @@
 import AuthForm from "./AuthForm";
 import FormContainer from "./FormContainer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as userService from "services/users";
 
 const SignUpPage = () => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -19,6 +20,7 @@ const SignUpPage = () => {
         <div className="bg-emerald-50 flex flex-col justify-center items-center h-screen flex-1">
           <FormContainer>
             <div className="text-rose-400 font-lato">{error}</div>
+
             <AuthForm
               fields={[
                 {
@@ -36,7 +38,6 @@ const SignUpPage = () => {
               ]}
               signInButton="Create account"
               onSubmit={async (values) => {
-                console.log(values);
                 if (values.username.length < 4) {
                   setError("username is too short");
                   return;
@@ -58,7 +59,11 @@ const SignUpPage = () => {
 
                 if (response.status === 201) {
                   setError('')
-                  console.log('USER CREATED')
+                  navigate("/", {
+                    state: {
+                      accountCreated: true,
+                    },
+                  });
                 } else {
                   const data = await response.json();
                   setError(data.error);
