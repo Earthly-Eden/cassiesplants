@@ -3,24 +3,40 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "./pages/auth/SignInPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import * as userservice from "services/users";
-// import apiFetch from "./services/apiFetch";
-
-
-// const response = await apiFetch("GET", "/api-key/info");
+import SessionContext from "contexts/SessionContext";
+import { jwtDecode } from "jwt-decode";
+import PlantListPage from "pages/PlantListPage";
 
 const App = () => {
-  const [ sessionToken, setSessionToken ] = useState(() => userservice.getSessionStorage());
+  const [sessionToken, setSessionToken] = useState(() =>
+    userservice.getSessionTokenStorage()
+  );
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-        </Routes>
-      </BrowserRouter>
+        <SessionContext.Provider
+          value={{
+            username: sessionToken ? jwtDecode(sessionToken).username : null,
+            signIn: (token) => {
+              setSessionToken(token);
+              userservice.setSessionTokenStorage(token);
+            },
+            signOut: () => {
+              setSessionToken(null);
+              userservice.removeSessionTokenStorage();
+            },
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<SignInPage />} />
+              <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/plants" element={<PlantListPage />} />
+            </Routes>
+          </BrowserRouter>
+        </SessionContext.Provider>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
