@@ -65,7 +65,7 @@ const SignInPage = () => {
                   }
                 }}
               />
-              <Link to="/" className="text-emerald-500 font-lato underline">
+              <Link to="/sign-up" className="text-emerald-500 font-lato underline">
                 create an account
               </Link>
             </FormContainer>
