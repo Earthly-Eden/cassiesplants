@@ -3,11 +3,13 @@ import RedirectToSignInIfSignedOut from "shared-components/RedirectToSignInIfSig
 import { useEffect, useState } from "react";
 import * as plantService from "services/plants";
 import PlantItem from "./PlantItem";
+import LoadingSpinner from "shared-components/LoadingSpinner";
 
 
 const PlantListPage = () => {
   const [ plants, setPlants ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
+
 
   useEffect(() => {
     (async () => {
@@ -26,12 +28,8 @@ const PlantListPage = () => {
         <Navbar />
         <div className="bg-green-50 min-h-screen">
         {
-          isLoading ? 
-          <div className="flex justify-center pt-80">
-            <i className="text-3xl text-emerald-800 fa-solid fa-spinner animate-spin"></i>
-
-
-          </div> : <div className="flex justify-center py-24">
+          isLoading ? <LoadingSpinner />
+           : <div className="flex justify-center py-24">
             <div className="w-full max-w-5xl">
               <div className="text-3xl font-playfair text-emerald-500">
                 Plants in Stock
