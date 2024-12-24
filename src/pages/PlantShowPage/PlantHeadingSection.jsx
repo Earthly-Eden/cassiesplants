@@ -10,9 +10,8 @@ const PlantHeadingSection = (props) => {
         <div className="">{plant.name}</div>
         <div>${plant.price}</div>
       </div>
-        <div className=" pl-px my-2 text-lg text-slate-500 italic ">
+        <div className="pl-px my-2 text-lg text-slate-500 italic ">
           {plant.botanical_name}
-
       </div>
     </>
   );
