@@ -1,19 +1,9 @@
 /* eslint-disable react/prop-types */
 import clsx from "clsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { getRandomIdx, POT_COLORS } from "shared-components/Utils"
 
-const POT_COLORS = {
-  stone: "bg-stone-200",
-  slate: "bg-slate-300",
-  sky: "bg-sky-700",
-  black: "bg-gray-600",
-  white: "bg-gray-50",
-  amber: "bg-amber-600",
-};
-
-const getRandomIdx = (array) => {
-  return Math.floor(Math.random() * array.length);
-};
 
 const PlantItem = (props) => {
   const { plant } = props;
@@ -22,10 +12,10 @@ const PlantItem = (props) => {
   console.log("plant data", plant);
   return (
     <div className=" mx-5 my-8">
-      <img
-        className="w-[270px] h-[320px] rounded-md"
-        src={plant.images[plantIdx].src}
-      />
+      <Link to={`/plants/${plant.id}`}>
+        <img className="w-[270px] h-[320px] rounded-md" src={plant.images[plantIdx].src}/>
+      </Link>
+
       <div className="flex justify-between my-3">
         <div className="text-xl font-playfair text-emerald-700">
           {plant.name}
