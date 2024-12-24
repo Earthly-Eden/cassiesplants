@@ -27,7 +27,7 @@ const PlantInfoSection = (props) => {
               title="Guaranteed Healthy"
               description="Guaranteed to arrive healthy or your money back"
             />
-            <div className="bg-slate-300 w-px"></div>
+            <div className="bg-slate-300 w-px m-1"></div>
             <BenefitBox
               icon="far fa-truck-fast"
               title="Free Shipping"
@@ -40,7 +40,7 @@ const PlantInfoSection = (props) => {
           <div className="hidden md:block">
             <PlantHeadingSection plant={plant} />
           </div>
-          <div className="text-slate-600 leading-relaxed mb-10">
+          <div className="text-slate-600 leading-relaxed mt-4 mb-10 ">
             {plant.description}
           </div>
           <PlantPurchaseOptions plant={plant} imageIdx={imageIdx} setImageIdx={setImageIdx}/>
