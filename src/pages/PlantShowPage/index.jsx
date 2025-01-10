@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Navbar from "shared-components/Navbar";
 import { useEffect, useState } from "react";
 import * as plantService from "services/plants"
@@ -10,6 +11,7 @@ const PlantShowPage = () => {
   const [ plant, setPlant ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(true);
 
+
   useEffect(() => {
     ( async () => {
       const response = await plantService.getPlantById({ id: plantId});
@@ -20,7 +22,7 @@ const PlantShowPage = () => {
 
 return (
   <>
-    <Navbar />
+    <Navbar/>
     <div className="flex justify-center min-h-screen bg-emerald-50 font-lato">
        <div className="w-full max-w-5xl px-8 py-24">
           {

@@ -5,11 +5,9 @@ import * as plantService from "services/plants";
 import PlantItem from "./PlantItem";
 import LoadingSpinner from "shared-components/LoadingSpinner";
 
-
 const PlantListPage = () => {
-  const [ plants, setPlants ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(false);
-
+  const [plants, setPlants] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -18,34 +16,36 @@ const PlantListPage = () => {
       const data = await response.json();
       setPlants(data);
       setIsLoading(false);
-    })()
+    })();
+  }, []);
 
-  }, [])
 
 
   return (
-      <RedirectToSignInIfSignedOut>
-        <Navbar />
-        <div className="bg-green-50 min-h-screen">
-        {
-          isLoading ? <LoadingSpinner />
-           : <div className="flex justify-center py-24">
+    <RedirectToSignInIfSignedOut>
+      <Navbar />
+      <div className="bg-green-50 min-h-screen">
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="flex justify-center py-24">
             <div className="w-full max-w-5xl">
               <div className="text-3xl font-playfair text-emerald-500">
                 Plants in Stock
               </div>
               <div className="flex flex-wrap justify-center ">
-               {
-                // Not using the idx for the key because the backend is calling the api twice and our indices are changing causing a crash to occur on our plantItem component.
-                plants.map((plant, idx) => <PlantItem key={plant.name} plant={plant}/>)
-               }
+                {
+                  // Not using the idx for the key because the backend is calling the api twice and our indices are changing causing a crash to occur on our plantItem component.
+                  plants.map((plant, idx) => (
+                    <PlantItem key={plant.name} plant={plant} />
+                  ))
+                }
               </div>
             </div>
           </div>
-        }
-
-          </div>
-      </RedirectToSignInIfSignedOut>
+        )}
+      </div>
+    </RedirectToSignInIfSignedOut>
   );
 };
 
