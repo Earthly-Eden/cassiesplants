@@ -12,7 +12,7 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const sessionContext = useContext(SessionContext);
 
- 
+
 
   return (
     <>
@@ -47,7 +47,6 @@ const SignInPage = () => {
                 ]}
                 signInButton="Sign in"
                 onSubmit={async (values) => {
-                  console.log(values.username)
                   const response = await userService.userSession({
                     username: values.username,
                     password: values.password,
@@ -56,9 +55,6 @@ const SignInPage = () => {
                   if (response.status === 201) {
                     //setting the session token
                     sessionContext.signIn(data.capstone_session_token);
-                    console.log(data);
-                    console.log("user has signed in!");
-
                     setError("");
                   } else {
                     setError(data.error);

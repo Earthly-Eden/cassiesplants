@@ -9,7 +9,6 @@ const PlantItem = (props) => {
   const { plant } = props;
   const [plantIdx, setPlantIdx] = useState(getRandomIdx(plant.images));
 
-  console.log("plant data", plant);
   return (
     <div className=" mx-5 my-8">
       <Link to={`/plants/${plant.id}`}>

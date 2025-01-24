@@ -53,7 +53,6 @@ const SignUpPage = () => {
                     setError("passwords do not match");
                     return;
                   }
-                  console.log("username and password were accepted!!!");
 
                   const response = await userService.createUser({
                     username: values.username,
