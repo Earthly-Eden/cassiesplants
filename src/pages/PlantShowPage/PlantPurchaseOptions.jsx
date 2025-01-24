@@ -59,8 +59,6 @@ const PlantPurchaseOptions = (props) => {
             const data = await response.json()
            
             setIsLoading(false)
-            console.log(data)
-            console.log(response.status)
            
           }}
           className="bg-emerald-500 hover:bg-emerald-800 rounded-full text-white ml-4 flex-1 p-2"

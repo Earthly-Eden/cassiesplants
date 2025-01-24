@@ -6,20 +6,21 @@ const ModalWrapper = (props) => {
   const { children, isOpen, onCloseClick } = props;
   const backgroundDivRef = useRef();
 
-  if(!isOpen) {
+  if (!isOpen) {
     return null;
   }
   return (
     <>
       <RemoveScroll>
-        <div 
-        ref={backgroundDivRef}
-        onClick={(e) => {
-          if(e.target === backgroundDivRef.current) {
-            onCloseClick();
-          }
-        }}
-        className= "fixed top-0 left-0 w-full h-full items-start bg-black/30 backdrop-blur-sm flex justify-end font-lato">
+        <div
+          ref={backgroundDivRef}
+          onClick={(e) => {
+            if (e.target === backgroundDivRef.current) {
+              onCloseClick();
+            }
+          }}
+          className="fixed top-0 left-0 w-full h-full items-start bg-black/30 backdrop-blur-sm flex justify-end font-lato"
+        >
           <button
             onClick={() => {
               onCloseClick(true);

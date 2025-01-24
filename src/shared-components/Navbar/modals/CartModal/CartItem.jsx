@@ -3,11 +3,7 @@ import * as cartService from "services/cart";
 
 const CartItem = (props) => {
   const { item, fetchCart } = props;
-
-
   const plantTotal = item.price_per_unit * item.quantity;
-
-console.log("our item", item);
 
   return (
     <>
@@ -33,8 +29,6 @@ console.log("our item", item);
           onClick={ async () => {
             await cartService.removeItemFromCart({itemId: item.id});
             fetchCart();
-
-
           }}  
           className="hover:text-red-500 text-slate-400 text-sm">
           <i className="mr-2 fa-solid fa-trash text-base"></i>
@@ -43,9 +37,6 @@ console.log("our item", item);
           </div>
         </div>
       </div>
-
-      
-   
     </>
   );
 };
